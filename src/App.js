@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { SkynetClient } from 'skynet-js';
+
+const portal = 'https://siasky.net/';
+const client = new SkynetClient(portal);
 
 function App() {
+
+  const [file, setFile] = useState();
+  const [url,setUrl] = useState();
+
+  function handleChange(event) {
+    setFile(event.target.files[0]);
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const {skylink} = await client.uploadFile(file);
+    const skylinkUrl = await client.getSkylinkUrl(skylink);
+    setUrl(skylinkUrl);
+    console.log(`Upload successful, skylink: ${skylinkUrl}`);
+    alert("File uploaded to the Skynet network")
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <form onSubmit = {handleSubmit}>
+      <input type="file" onChange={handleChange} />
+      <button type ="submit">Click to submit</button>
+      </form>
+      {url ? <img alt="uploaded" src={url}/> : <div>File not Uploaded</div>}
     </div>
   );
 }
