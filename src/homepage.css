@@ -29,3 +29,12 @@ margin: auto;
         font-size: 60px;
     }
 }
+
+.uploadButton {
+    font-size: 2vw;
+}
+@media screen and (min-width: 1200px) {
+    .uploadButton {
+        font-size: 20px;
+    }
+}

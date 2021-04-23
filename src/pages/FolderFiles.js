@@ -1,6 +1,9 @@
+import { ArwesThemeProvider,Button, FrameBox, FrameHexagon, FramePentagon, FrameUnderline, StylesBaseline, Text } from "@arwes/core";
+import { Box, FileInput } from "grommet";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import SkyID from 'skyid';
+import "../homepage.css";
 
 function skyidEventCallback(message) {
 	switch (message) {
@@ -40,6 +43,8 @@ function FolderFiles() {
   const [file, setFile] = useState();
   const [url,setUrl] = useState();
   const [bUrl,setBUrl] = useState();
+  const [login,setLogin] = useState(false);
+  let history = useHistory();
 
   const getIndex = async () => {
     skyid.getJSON("index", function(response) {
@@ -59,9 +64,18 @@ function FolderFiles() {
     };
   }, []);
 
+  const handleLogout = async () => {
+    skyid.sessionDestroy()
+    setLogin(false)
+    window.location.reload();
+  }
+
   function handleChange(event) {
     setFile(event.target.files[0]);
-    // console.log(event.target.files[0]);
+  }
+
+  function handleChangewrapper() {
+    document.getElementById('inputFile').click();
   }
   
   const uploadIndex = () => 
@@ -81,21 +95,18 @@ function FolderFiles() {
   }
 
   const handleSubmit = async (event) => {
-      event.preventDefault();      
-      skyid.uploadEncryptedFile(file, '', function(skylink) 
-      {
-        console.log('Uploaded:', skylink);
-        setUrl(skylink);
-        let todaysDate = new Date;
-        todaysDate = todaysDate.toDateString();
-        let obj = {fileName: file.name, Date: todaysDate, Category: folderName, Link: skylink};
-        setIndex(index.Files.push(obj));
-        uploadIndex();
-        // console.log(index);
-      })
-      
-      
-      alert("Encrypted File uploaded to the Skynet network")
+    event.preventDefault();      
+    skyid.uploadEncryptedFile(file, '', function(skylink) 
+    {
+      console.log('Uploaded:', skylink);
+      setUrl(skylink);
+      let todaysDate = new Date;
+      todaysDate = todaysDate.toDateString();
+      let obj = {fileName: file.name, Date: todaysDate, Category: folderName, Link: skylink};
+      setIndex(index.Files.push(obj));
+      uploadIndex();
+    })
+    alert("Encrypted File uploaded to the Skynet network")
   }
 
   const getFile = async () => {
@@ -105,36 +116,87 @@ function FolderFiles() {
       setBUrl(blobUrl);
     })
   }
+  let themeSettings = {};
+
+  const downloadUploadedFile = (link,filename) =>
+  {
+    console.log(link);
+    skyid.downloadEncryptedFile(link, '', function(blobUrl){
+      console.log('File downloaded', blobUrl);
+      let tempLink = document.createElement('a');
+      tempLink.href = blobUrl;
+      tempLink.setAttribute('download', filename);
+      tempLink.click();
+    })
+  }
 
   return (
-    <div >
+    <div style={{ backgroundColor:"#021114", height:"100vh"}}>
     
+    <ArwesThemeProvider themeSettings={themeSettings}>
+      <StylesBaseline />
+      {/* NavBar */}
+      <div>
+      {skyid.seed ? 
+          <div>
+          <pre className="header" >
+          <Box direction="row" gap="small" pad="small">
+            <Box style={{paddingLeft:"20vw"}}>
+            <h2 style={{ marginBottom:0,padding:0}} className="textOut">{folderName.replace("_", " ")}</h2>
+            </Box>
+            <Box className="logOut" style={{paddingLeft:"15vw"}}>
+            <Button onClick= {handleLogout} FrameComponent={FramePentagon} animator={{ animate: false }} className="logOut" >
+                <Text style={{ width: "100%", height: "100%"}} className="textLog">Log Out</Text>
+            </Button>
+            </Box>
+          </Box>
+          </pre>
+          </div>
+      : history.push('/')
+      }
+      </div>
+      
+      {/* File Upload */}
+      <br/>
+      <Box direction="column" align="center" padding="small" margin="medium">
+      <FrameBox>
+      <div style={{paddingLeft:"4vw", paddingRight:"4vw", paddingTop:"2vw"}}>
+        <Button FrameComponent={FrameUnderline} onClick={handleChangewrapper} >
+          <Text className="uploadButton">Upload file</Text>
+        </Button>
+      </div>
+      <div style={{paddingLeft:"4vw", paddingRight:"4vw", paddingTop:"2vw", paddingBottom:"2vw"}}>
+        <form onSubmit = {handleSubmit}>
+          <input type="file" onChange={handleChange} style={{ display: "none" }} id="inputFile"/>
+          <br/>
+          <Button FrameComponent={FrameBox} type ="submit"><Text className="uploadButton">Click to submit</Text></Button>
+        </form>
+      </div>
+      </FrameBox>
+      </Box>
+      <br/>
+
+
     {/* Display All Folder Files */}
     {
     index.Files ?
      index.Files.map((file) => {
        if(file.Category === folderName)
        {
-        return (<div>{file.fileName}</div>)
+        return (
+        <div>
+          <button onClick={() => { downloadUploadedFile(file.Link,file.fileName)}} >{file.fileName}</button>
+          
+        </div>
+        )
        }
      }) 
     : <>Loading...</>
     }
 
-    {/* Upload Encrypted Files to the Folder 
-      take an input file and uploadEncryptedFile and save the skyLink, upload to Index  
-    */}
-    <br/>
-    <form onSubmit = {handleSubmit}>
-        <input type="file" onChange={handleChange} />
-        <button type ="submit">Click to submit</button>
-    </form>
-    <br/>
-
-    <button onClick={getFile}>Get file</button>
-    {url ? <a href={bUrl} download="a.png">Download</a> : <div>File not Uploaded</div>}
-    {/* Download All the Files */}
-    
+    {/* <button onClick={getFile}>Get file</button>
+    {url ? <a href={bUrl} download="a.png">Download</a> : <div>File not Uploaded</div>} */}
+    </ArwesThemeProvider>
     </div>
   );
 }

@@ -48,26 +48,26 @@ function MindFile() {
     }
     let themeSettings = {};
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        skyid.uploadEncryptedFile(file, '', function(skylink) {
-        console.log('Uploaded:', skylink)
-        setUrl(skylink)
-        })
-        alert("Encrypted File uploaded to the Skynet network")
+      event.preventDefault();
+      skyid.uploadEncryptedFile(file, '', function(skylink) {
+      console.log('Uploaded:', skylink)
+      setUrl(skylink)
+      })
+      alert("Encrypted File uploaded to the Skynet network")
     }
 
     const handleLogout = async () => {
-        skyid.sessionDestroy()
-        setLogin(false)
-        window.location.reload();
+      skyid.sessionDestroy()
+      setLogin(false)
+      window.location.reload();
     }
 
     const getFile = async () => {
-        console.log("get file started");
-        skyid.downloadEncryptedFile(url, '', function(blobUrl){
-          console.log('File downloaded', blobUrl);
-          setBUrl(blobUrl);
-        })
+      console.log("get file started");
+      skyid.downloadEncryptedFile(url, '', function(blobUrl){
+        console.log('File downloaded', blobUrl);
+        setBUrl(blobUrl);
+      })
     }
     
     const setInitialIndex = async () => 
