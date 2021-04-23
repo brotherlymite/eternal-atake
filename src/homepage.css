@@ -1,0 +1,31 @@
+.logOut {
+margin: auto;
+}
+
+.header {
+    padding: 10;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 70vh; */
+}
+.textLog {
+    font-size: 2vw;
+}
+@media screen and (min-width: 1200px) {
+    .textLog {
+        font-size: 20px;
+    }
+}
+
+.textOut {
+    font-size: 5vw;
+}
+@media screen and (min-width: 1200px) {
+    .textOut {
+        font-size: 60px;
+    }
+}
