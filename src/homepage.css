@@ -38,3 +38,16 @@ margin: auto;
         font-size: 20px;
     }
 }
+
+.textArea {
+  margin: 20px;
+  border: none;
+  resize: none;
+  /* background: aqua; */
+  padding: 4px 2px;
+  font-size: 16px;
+  line-height: 20px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  min-height: 20px;
+}

@@ -167,10 +167,12 @@ function FolderFiles() {
       </FrameBox>
       </Box>
       <br/>
+
+      {/* Filtering Categorical Files */}
       {index.Files ? index.Files.map((file) => {if(file.Category === folderName){ newIndex.push(file)}}) : <></>}
       
+      {/* File Table */}
       {index.Files && newIndex? 
-        
         <Box width="xlarge" alignSelf="center" pad="medium" margin="medium" alignContent="center" justify="center" style={{margin:"auto"}}>
         <MaterialTable style={{backgroundColor:"#021114",color:"#7efcf6"}}
           title="Uploaded Files"
@@ -182,7 +184,6 @@ function FolderFiles() {
             { title: 'Date Added', field: 'Date' },
             { title: 'Download', field: 'status', render: (file) => <div><Button onClick={() => { downloadUploadedFile(file.Link,file.fileName)}} >Download</Button></div> },
           ]}
-          
           options={{
             search:false , 
             paging:false ,
@@ -199,6 +200,8 @@ function FolderFiles() {
         </Box>
         : <h2>No Files Uploaded</h2>
       }
+
+      
     </ArwesThemeProvider>
     </div>
   );
