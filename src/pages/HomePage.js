@@ -4,6 +4,10 @@ import SkyID from 'skyid';
 import {useHistory} from "react-router-dom";
 import { ArwesThemeProvider, Button, Card, FrameCorners, FramePentagon, StylesBaseline, Text } from "@arwes/core";
 import { Box } from 'grommet';
+import mindfileImage from "../images/mindfile.jpeg";
+import eternalAI from "../images/eternalAI.jpeg";
+import socialMedia from "../images/socialMedia2.jpeg";
+
 function skyidEventCallback(message) {
 	switch (message) {
 		case 'login_fail':
@@ -76,8 +80,8 @@ function HomePage() {
         <Card
             // animator={{ activate }}
             image={{
-              src: "",
-              alt: 'A nebula'
+              src: mindfileImage,
+              alt: 'mindfile'
             }}
             title='MindFile'
             options={
@@ -89,17 +93,16 @@ function HomePage() {
             hover
             style={{ maxWidth: 800 }}
         >
-            <Text>
-              A nebula is an interstellar cloud of dust, hydrogen,
-              helium and other ionized gases. Originally, the term
-              was used to describe any diffused astronomical object,
-              including galaxies beyond the Milky Way.
+            <Text style={{fontSize:"1.1em"}}>
+            Store all your sensitive personal data including 
+            Biometrics Photos Videos Chat Exports and your
+            Last Will securely on MindFile. 
             </Text>
         </Card>
         <Card
             // animator={{ activate }}
             image={{
-              src: "",
+              src: eternalAI,
               alt: 'A nebula'
             }}
             title='Talk With Eternal AI'
@@ -112,17 +115,17 @@ function HomePage() {
             hover
             style={{ maxWidth: 800 }}
         >
-            <Text>
-              A nebula is an interstellar cloud of dust, hydrogen,
-              helium and other ionized gases. Originally, the term
-              was used to describe any diffused astronomical object,
-              including galaxies beyond the Milky Way.
+            <Text style={{fontSize:"1.1em"}}>
+              Talk with our Eternal AI which extracts out
+              your personal data and perhaps your digital consciousness,
+              while you talk to it, 
+              which is then used to train your avatar. 
             </Text>
         </Card>
         <Card
             // animator={{ activate }}
             image={{
-              src: "",
+              src: socialMedia,
               alt: 'A nebula'
             }}
             title='Connect Social Media'
@@ -135,11 +138,10 @@ function HomePage() {
             hover
             style={{ maxWidth: 800 }}
         >
-            <Text>
-              A nebula is an interstellar cloud of dust, hydrogen,
-              helium and other ionized gases. Originally, the term
-              was used to describe any diffused astronomical object,
-              including galaxies beyond the Milky Way.
+            <Text style={{fontSize:"1.1em"}}>
+              Connect and export your data including
+              your Posts, Profile Photo, Likes, etc.
+              from your Social Media sites.
             </Text>
         </Card>
         </Box>

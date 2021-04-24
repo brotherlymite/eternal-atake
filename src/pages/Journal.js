@@ -119,9 +119,6 @@ function Journal() {
       }
       </div>
 
-      
-
-
       {/* UPLOAD JOURNAL */}
       <Box width="xlarge" pad="large" gap="large" style={{margin:"auto"}}>
       <div>

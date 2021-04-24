@@ -5,6 +5,7 @@ import { ArwesThemeProvider, Button, Card, FrameBox, FramePentagon, LoadingBars,
 import "../mindfile.css";
 import "../homepage.css";
 import { Box } from 'grommet';
+import journalImage from "../images/journal.jpeg";
 
 function skyidEventCallback(message) {
 	switch (message) {
@@ -72,7 +73,7 @@ function MindFile() {
     
     const setInitialIndex = async () => 
     {
-        let initialObject = { Folder:[ "freeform_audio" ,"freeform_video","freeform_photos", "chat_exports"], Files:[] , Journal:[] };
+        let initialObject = { Folder:[ "freeform_audio" ,"freeform_video","freeform_photos", "chat_exports","biometrics","last_will","others"], Files:[] , Journal:[] };
         let jsonData = JSON.stringify(initialObject);
         skyid.setJSON('index', jsonData, function(response) 
         {
@@ -165,7 +166,7 @@ function MindFile() {
         <Card
           // animator={{ activate }}
           image={{
-            src: "",
+            src: journalImage,
             alt: 'Personal Journal'
           }}
           title='Personal Journal'
@@ -178,8 +179,8 @@ function MindFile() {
           hover
           style={{ maxWidth: 800 }}
         >
-          <Text>
-            A nebula is an interstellar cloud of dust, hydrogen,
+          <Text style={{fontSize:"1.1em"}}>
+            Upload and maintain your personal journal and tell your Diary how was your day.
           </Text>
         </Card>
         <br/>
@@ -207,7 +208,7 @@ function MindFile() {
               </FrameBox>
             )
 					} )  
-					:<LoadingBars size={1.5} speed={4} full animator={{ activate:"True" }} />
+					:<LoadingBars size={1.5} speed={4} animator={{ activate:"True" }} />
 					}
 				</Box>
         <br/>
