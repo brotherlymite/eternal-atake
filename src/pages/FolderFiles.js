@@ -1,5 +1,6 @@
 import { ArwesThemeProvider,Button, FrameBox, FrameHexagon, FramePentagon, FrameUnderline, StylesBaseline, Text } from "@arwes/core";
-import { Box, FileInput } from "grommet";
+import { Box, FileInput, Grid } from "grommet";
+import MaterialTable from "material-table";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import SkyID from 'skyid';
@@ -31,10 +32,7 @@ if (window.location.hostname === 'idtest.local' || window.location.hostname === 
 var opts = { 'devMode': devMode  }
 var skyid = new SkyID('App name',skyidEventCallback, opts)
 
-function getFileExtension(filename)
-{
-  return filename.split('.').pop();
-}
+
 
 function FolderFiles() {
 
@@ -45,6 +43,7 @@ function FolderFiles() {
   const [bUrl,setBUrl] = useState();
   const [login,setLogin] = useState(false);
   let history = useHistory();
+  let newIndex = [];
 
   const getIndex = async () => {
     skyid.getJSON("index", function(response) {
@@ -109,13 +108,6 @@ function FolderFiles() {
     alert("Encrypted File uploaded to the Skynet network")
   }
 
-  const getFile = async () => {
-    console.log("get file started");
-    skyid.downloadEncryptedFile(url, '', function(blobUrl){
-      console.log('File downloaded', blobUrl);
-      setBUrl(blobUrl);
-    })
-  }
   let themeSettings = {};
 
   const downloadUploadedFile = (link,filename) =>
@@ -175,27 +167,38 @@ function FolderFiles() {
       </FrameBox>
       </Box>
       <br/>
-
-
-    {/* Display All Folder Files */}
-    {
-    index.Files ?
-     index.Files.map((file) => {
-       if(file.Category === folderName)
-       {
-        return (
-        <div>
-          <button onClick={() => { downloadUploadedFile(file.Link,file.fileName)}} >{file.fileName}</button>
+      {index.Files ? index.Files.map((file) => {if(file.Category === folderName){ newIndex.push(file)}}) : <></>}
+      
+      {index.Files && newIndex? 
+        
+        <Box width="xlarge" alignSelf="center" pad="medium" margin="medium" alignContent="center" justify="center" style={{margin:"auto"}}>
+        <MaterialTable style={{backgroundColor:"#021114",color:"#7efcf6"}}
+          title="Uploaded Files"
+          search="False"
+          paging="false"
+          data={newIndex}
+          columns={[
+            { title: 'File', field: 'fileName' },
+            { title: 'Date Added', field: 'Date' },
+            { title: 'Download', field: 'status', render: (file) => <div><Button onClick={() => { downloadUploadedFile(file.Link,file.fileName)}} >Download</Button></div> },
+          ]}
           
-        </div>
-        )
-       }
-     }) 
-    : <>Loading...</>
-    }
-
-    {/* <button onClick={getFile}>Get file</button>
-    {url ? <a href={bUrl} download="a.png">Download</a> : <div>File not Uploaded</div>} */}
+          options={{
+            search:false , 
+            paging:false ,
+            rowStyle: {
+              backgroundColor: '#021114',
+              color:"#7efcf6"
+            },
+            headerStyle: {
+              backgroundColor: '#06d8d7',
+              color:"#021114"
+            }
+          }}
+        />
+        </Box>
+        : <h2>No Files Uploaded</h2>
+      }
     </ArwesThemeProvider>
     </div>
   );
@@ -206,4 +209,34 @@ export default FolderFiles;
 {console.log(getFileExtension("image1.jpeg"))}
 */}
 {/* { folderName ? folderName : <>aa</>}
-    {console.log(index)} */}
+{console.log(index)} */}
+// Display All Folder Files
+//     {
+//     index.Files ?
+//      index.Files.map((file) => {
+//        if(file.Category === folderName)
+//        {
+//         return (
+//         <div>
+//           <Button onClick={() => { downloadUploadedFile(file.Link,file.fileName)}} >Download</Button>
+          
+//         </div>
+//         )
+//        }
+//      }) 
+//     : <>Loading...</>
+//     }
+{/* <button onClick={getFile}>Get file</button>
+    {url ? <a href={bUrl} download="a.png">Download</a> : <div>File not Uploaded</div>} */}
+// function getFileExtension(filename)
+// {
+//   return filename.split('.').pop();
+// }
+
+// const getFile = async () => {
+//   console.log("get file started");
+//   skyid.downloadEncryptedFile(url, '', function(blobUrl){
+//     console.log('File downloaded', blobUrl);
+//     setBUrl(blobUrl);
+//   })
+// }

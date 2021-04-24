@@ -7,6 +7,7 @@ import {ArwesThemeProvider, Button, FrameHexagon, FrameLines, StylesBaseline, Te
 import { AnimatorGeneralProvider } from "@arwes/animation";
 import { BleepsProvider } from "@arwes/sounds";
 import { Box } from 'grommet';
+import MaterialTable from 'material-table';
 
 function LoginPage() {
     let history = useHistory();
