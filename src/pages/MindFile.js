@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useHistory } from "react-router";
 import SkyID from 'skyid';
-import { ArwesThemeProvider, Button, Card, FrameBox, FrameCorners, FramePentagon, LoadingBars, StylesBaseline, Text } from "@arwes/core";
+import { ArwesThemeProvider, Button, Card, FrameBox, FramePentagon, LoadingBars, StylesBaseline, Text } from "@arwes/core";
 import "../mindfile.css";
 import "../homepage.css";
 import { Box } from 'grommet';
@@ -73,7 +73,6 @@ function MindFile() {
     const setInitialIndex = async () => 
     {
         let initialObject = { Folder:[ "freeform_audio" ,"freeform_video","freeform_photos", "chat_exports"], Files:[] , Journal:[] };
-        let emptyObj;
         let jsonData = JSON.stringify(initialObject);
         skyid.setJSON('index', jsonData, function(response) 
         {
@@ -112,9 +111,6 @@ function MindFile() {
         else {
           getIndex();
         }
-    //   var responseObject = JSON.parse(response)
-    //   setIndex(responseObject);
-    //   return responseObject;
     })
     }
 
@@ -211,7 +207,7 @@ function MindFile() {
               </FrameBox>
             )
 					} )  
-					:<>Loading ...</>
+					:<LoadingBars size={1.5} speed={4} full animator={{ activate:"True" }} />
 					}
 				</Box>
         <br/>

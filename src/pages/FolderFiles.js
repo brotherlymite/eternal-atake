@@ -1,5 +1,5 @@
-import { ArwesThemeProvider,Button, FrameBox, FrameHexagon, FramePentagon, FrameUnderline, StylesBaseline, Text } from "@arwes/core";
-import { Box, FileInput, Grid } from "grommet";
+import { ArwesThemeProvider,Button, FrameBox,LoadingBars, FramePentagon, FrameUnderline, StylesBaseline, Text } from "@arwes/core";
+import { Box } from "grommet";
 import MaterialTable from "material-table";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
@@ -31,8 +31,6 @@ if (window.location.hostname === 'idtest.local' || window.location.hostname === 
 
 var opts = { 'devMode': devMode  }
 var skyid = new SkyID('App name',skyidEventCallback, opts)
-
-
 
 function FolderFiles() {
 
@@ -105,7 +103,7 @@ function FolderFiles() {
       setIndex(index.Files.push(obj));
       uploadIndex();
     })
-    alert("Encrypted File uploaded to the Skynet network")
+    alert("File Encrypted and sending to the network");
   }
 
   let themeSettings = {};
@@ -198,7 +196,7 @@ function FolderFiles() {
           }}
         />
         </Box>
-        : <h2>No Files Uploaded</h2>
+        : <LoadingBars size={1.5} speed={4} full animator={{ activate:"True" }}/>
       }
 
       

@@ -1,4 +1,4 @@
-import { ArwesThemeProvider,Button, FrameBox, FramePentagon, StylesBaseline, Text } from "@arwes/core";
+import { ArwesThemeProvider,Button, FrameBox, FramePentagon, LoadingBars, StylesBaseline, Text } from "@arwes/core";
 import { Box } from "grommet";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
@@ -165,7 +165,7 @@ function Journal() {
           }}
         />
         </Box>
-        : console.log("No Journal Uploaded")
+        : <LoadingBars size={1.5} speed={4}  animator={{ activate:"False" }}/>
       }
 
       <Modal open={open} setOpen={setOpen}>

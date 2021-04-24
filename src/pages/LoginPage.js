@@ -3,7 +3,7 @@ import SkyID from 'skyid';
 import {useHistory} from "react-router-dom";
 import Particles from "react-particles-js";
 import "../login.css";
-import {ArwesThemeProvider, Button, FrameHexagon, FrameLines, StylesBaseline, Text} from "@arwes/core";
+import {ArwesThemeProvider, Button, FrameHexagon, FrameLines, LoadingBars, StylesBaseline, Text} from "@arwes/core";
 import { AnimatorGeneralProvider } from "@arwes/animation";
 import { BleepsProvider } from "@arwes/sounds";
 import { Box } from 'grommet';
@@ -67,10 +67,10 @@ function LoginPage() {
   return (
     <div className="bg">
       {skyid.seed ? history.push('/home') : console.log("skyid seed undefined")}
-      
+      <ArwesThemeProvider>
+      <AnimatorGeneralProvider animator={animatorGeneral} >
         {!login ? 
-        <ArwesThemeProvider>
-        <AnimatorGeneralProvider animator={animatorGeneral} >
+            <div>
             <StylesBaseline styles={{
                 button: { margin: '0 20px 20px 0' }
             }} />
@@ -96,10 +96,10 @@ function LoginPage() {
             </Button>
             </div>
             </Box>
-
-        </AnimatorGeneralProvider>
-        </ArwesThemeProvider>
-        : console.log(history)}
+            </div>
+        : <LoadingBars size={2} speed={4} full animator={{ activate }} />}
+      </AnimatorGeneralProvider>
+     </ArwesThemeProvider>
       
     {console.log(skyid)}
 
