@@ -1,6 +1,7 @@
 {
   "name": "eternal-atake",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@arwes/animation": "^1.0.0-alpha.19",

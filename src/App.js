@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, BrowserRouter} from "react-router-dom";
+import {Route, HashRouter} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MindFile from "./pages/MindFile";
 import Bot from "./pages/Bot";
@@ -10,14 +10,14 @@ import FolderFiles from "./pages/FolderFiles";
 function App() {
   return (
     <div >
-      <BrowserRouter>
+      <HashRouter>
         <Route path="/" exact component={LoginPage} />
         <Route path="/home" exact component={HomePage}/>
         <Route path="/mindfile" exact component={MindFile}/>
         <Route path="/mindfile/:folderName" component={FolderFiles}/>
         <Route path="/train" exact component={Bot} />
         <Route path="/journal" exact component={Journal} />
-      </BrowserRouter>
+      </HashRouter>
 
     </div>
   );

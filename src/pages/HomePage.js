@@ -32,7 +32,7 @@ if (window.location.hostname === 'idtest.local' || window.location.hostname === 
 	var devMode = false
 }
 var opts = { 'devMode': devMode  }
-var skyid = new SkyID('App name',skyidEventCallback, opts)
+var skyid = new SkyID('Eternal Atake',skyidEventCallback, opts)
 
 function HomePage() {
     let history = useHistory();

@@ -19,7 +19,7 @@ function LoginPage() {
             case 'login_success':
                 console.log('Login succeeded!');
                 // history.push('/home');
-                window.location.href = '/home';
+                window.location.href = '/#/home';
                 // fetchNote()
                 break;
             case 'destroy':
@@ -38,7 +38,7 @@ function LoginPage() {
     }
 
     var opts = { 'devMode': devMode  }
-    var skyid = new SkyID('App name',skyidEventCallback, opts)
+    var skyid = new SkyID('Eternal Atake',skyidEventCallback, opts)
 
     const [login,setLogin] = useState(false);
 

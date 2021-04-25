@@ -31,7 +31,7 @@ if (window.location.hostname === 'idtest.local' || window.location.hostname === 
 	var devMode = false
 }
 var opts = { 'devMode': devMode  }
-var skyid = new SkyID('App name',skyidEventCallback, opts)
+var skyid = new SkyID('Eternal Atake',skyidEventCallback, opts)
 
 function MindFile() {
     const [login,setLogin] = useState(false);
@@ -107,6 +107,7 @@ function MindFile() {
         else if(response === '')
         {
           console.log("Initializing mindfile ........");
+          alert("Wait a minute while we initialize your MindFile");
           setInitialIndex();
         }
         else {

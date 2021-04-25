@@ -48,8 +48,10 @@ function FolderFiles() {
     if (response === false) {
     alert('Sorry, skyid.getFile failed :(')
     }
+    console.log("Before parse: "+ response);
     var responseObject = JSON.parse(response);
-    console.log(response);
+    console.log("After Parse : "+ responseObject);
+    // console.log(response);
     setIndex(responseObject);
     })
   }
