@@ -78,8 +78,7 @@ function Journal() {
     setData(Data.Journal.push(text));
     console.log(text);
     // pushData(data);
-    let xdata = Data;
-    skyid.setJSON('index', xdata, function(response) 
+    skyid.setJSON('index', Data, function(response) 
     {
       if (response !== true) {
       alert('Sorry, skyid.setFile failed :(');

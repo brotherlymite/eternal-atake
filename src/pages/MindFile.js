@@ -116,8 +116,7 @@ function MindFile() {
 		const setIndextest = async () => 
     {
         let initialObject = { Folder:["Freeform Audio" ,"Freeform Video","Freeform Photos", "Chat exports"], Journal: [{date:"date1" ,text:"text1"}, {date:"date2" ,text:"text2"}] };
-        let jsonData = initialObject;
-        skyid.setJSON('index', jsonData, function(response) 
+        skyid.setJSON('index', initialObject, function(response) 
         {
             if (response !== true) {
             alert('Sorry, skyid.setFile failed :(');
