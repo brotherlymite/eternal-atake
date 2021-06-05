@@ -48,11 +48,9 @@ function FolderFiles() {
     if (response === false) {
     alert('Sorry, skyid.getFile failed :(')
     }
-    console.log("Before parse: "+ response);
-    var responseObject = JSON.parse(response);
-    console.log("After Parse : "+ responseObject);
+    console.log("Response: "+ response);
     // console.log(response);
-    setIndex(responseObject);
+    setIndex(response);
     })
   }
 
@@ -79,15 +77,13 @@ function FolderFiles() {
   
   const uploadIndex = () => 
   {
-    let jsonData = JSON.stringify(index);
-    skyid.setJSON('index', jsonData, function(response) 
+    skyid.setJSON('index', index, function(response) 
     {
       if (response !== true) {
       alert('Sorry, skyid.setFile failed :(');
       }
       else {
-      var responseObject = JSON.parse(response);
-      console.log(responseObject);
+      console.log(response);
       getIndex();
       }
     })

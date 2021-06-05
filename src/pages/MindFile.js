@@ -74,15 +74,13 @@ function MindFile() {
     const setInitialIndex = async () => 
     {
         let initialObject = { Folder:[ "freeform_audio" ,"freeform_video","freeform_photos", "chat_exports","biometrics","last_will","others"], Files:[] , Journal:[] };
-        let jsonData = JSON.stringify(initialObject);
-        skyid.setJSON('index', jsonData, function(response) 
+        skyid.setJSON('index', initialObject, function(response) 
         {
             if (response !== true) {
             alert('Sorry, skyid.setFile failed :(');
             }
             else {
-            var responseObject = JSON.parse(response);
-            console.log(responseObject);
+            console.log(response);
             getIndex();
             }
         })
@@ -93,9 +91,8 @@ function MindFile() {
         if (response === false) {
         alert('Sorry, skyid.getFile failed :(')
         }
-        var responseObject = JSON.parse(response);
-        console.log(responseObject);
-        setIndex(responseObject);
+        console.log(response);
+        setIndex(response);
     })
     }
 
@@ -119,7 +116,7 @@ function MindFile() {
 		const setIndextest = async () => 
     {
         let initialObject = { Folder:["Freeform Audio" ,"Freeform Video","Freeform Photos", "Chat exports"], Journal: [{date:"date1" ,text:"text1"}, {date:"date2" ,text:"text2"}] };
-        let jsonData = JSON.stringify(initialObject);
+        let jsonData = initialObject;
         skyid.setJSON('index', jsonData, function(response) 
         {
             if (response !== true) {
