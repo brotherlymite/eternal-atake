@@ -77,7 +77,7 @@ function MindFile() {
         skyid.setJSON('index', initialObject, function(response) 
         {
             if (response !== true) {
-            alert('Sorry, skyid.setFile failed :(');
+            alert('Sorry, skyid.setJSON failed :(');
             }
             else {
             console.log(response);
@@ -119,7 +119,7 @@ function MindFile() {
         skyid.setJSON('index', initialObject, function(response) 
         {
             if (response !== true) {
-            alert('Sorry, skyid.setFile failed :(');
+            alert('Sorry, skyid.setJSON failed :(');
             }
         })
     }

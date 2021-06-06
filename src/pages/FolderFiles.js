@@ -80,7 +80,7 @@ function FolderFiles() {
     skyid.setJSON('index', index, function(response) 
     {
       if (response !== true) {
-      alert('Sorry, skyid.setFile failed :(');
+      alert('Sorry, skyid.setJSON failed :(');
       }
       else {
       console.log(response);
