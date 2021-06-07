@@ -48,9 +48,8 @@ function Journal() {
       if (response === false) {
       alert('Sorry, skyid.getFile failed :(')
       }
-      var responseObject = JSON.parse(response);
-      console.log(responseObject.Journal);
-      setData(responseObject);
+      console.log(response.Journal);
+      setData(response);
   })
   }
 
@@ -79,15 +78,13 @@ function Journal() {
     setData(Data.Journal.push(text));
     console.log(text);
     // pushData(data);
-    let xdata = JSON.stringify(Data);
-    skyid.setJSON('index', xdata, function(response) 
+    skyid.setJSON('index', Data, function(response) 
     {
       if (response !== true) {
-      alert('Sorry, skyid.setFile failed :(');
+      alert('Sorry, skyid.setJSON failed :(');
       }
       else {
-      var responseObject = JSON.parse(response);
-      console.log(responseObject);
+      console.log(response);
       loadData();
       }
     })
