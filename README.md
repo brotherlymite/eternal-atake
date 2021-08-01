@@ -1,5 +1,5 @@
 # Eternal Atake
-A Decentralised Data storage platform for Digital AfterLife.<br/>
+A Decentralised Data storage platform for Digital Consciousness.<br/>
 More info : [Eternal Atake](https://www.eternalatake.org/)
 
 ## Features :
